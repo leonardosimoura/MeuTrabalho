@@ -75,64 +75,67 @@ namespace MT.Infra.DataEF.Repositories
 
         #region EF Helps
 
-        private Expression RemoveConvert(Expression expression)
-        {
-            while (expression.NodeType == ExpressionType.Convert
-                   || expression.NodeType == ExpressionType.ConvertChecked)
-            {
-                expression = ((UnaryExpression)expression).Operand;
-            }
+        //private Expression RemoveConvert(Expression expression)
+        //{
+        //    while (expression.NodeType == ExpressionType.Convert
+        //           || expression.NodeType == ExpressionType.ConvertChecked)
+        //    {
+        //        expression = ((UnaryExpression)expression).Operand;
+        //    }
 
-            return expression;
-        }
+        //    return expression;
+        //}
 
-        private bool TryParsePath(Expression expression, out string path)
-        {
+        //private bool TryParsePath(Expression expression, out string path)
+        //{
 
-            path = null;
-            var withoutConvert = RemoveConvert(expression); // Removes boxing
-            var memberExpression = withoutConvert as MemberExpression;
-            var callExpression = withoutConvert as MethodCallExpression;
+        //    path = null;
+        //    var withoutConvert = RemoveConvert(expression); // Removes boxing
+        //    var memberExpression = withoutConvert as MemberExpression;
+        //    var callExpression = withoutConvert as MethodCallExpression;
 
-            if (memberExpression != null)
-            {
-                var thisPart = memberExpression.Member.Name;
-                if (!TryParsePath(memberExpression.Expression, out string parentPart))
-                {
-                    return false;
-                }
-                path = parentPart == null ? thisPart : (parentPart + "." + thisPart);
-            }
-            else if (callExpression != null)
-            {
-                if (callExpression.Method.Name == "Select"
-                    && callExpression.Arguments.Count == 2)
-                {
-                    if (!TryParsePath(callExpression.Arguments[0], out string parentPart))
-                    {
-                        return false;
-                    }
-                    if (parentPart != null)
-                    {
-                        if (callExpression.Arguments[1] is LambdaExpression subExpression)
-                        {
-                            if (!TryParsePath(subExpression.Body, out string thisPart))
-                            {
-                                return false;
-                            }
-                            if (thisPart != null)
-                            {
-                                path = parentPart + "." + thisPart;
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
-            }
+        //    if (memberExpression != null)
+        //    {
+        //        var thisPart = memberExpression.Member.Name;
+        //        string parentPart;
+        //        if (!TryParsePath(memberExpression.Expression, out parentPart))
+        //        {
+        //            return false;
+        //        }
+        //        path = parentPart == null ? thisPart : (parentPart + "." + thisPart);
+        //    }
+        //    else if (callExpression != null)
+        //    {
+        //        if (callExpression.Method.Name == "Select"
+        //            && callExpression.Arguments.Count == 2)
+        //        {
+        //            string parentPart;
+        //            if (!TryParsePath(callExpression.Arguments[0], out parentPart))
+        //            {
+        //                return false;
+        //            }
+        //            if (parentPart != null)
+        //            {
+        //                if (callExpression.Arguments[1] is LambdaExpression subExpression)
+        //                {
+        //                    string thisPart;
+        //                    if (!TryParsePath(subExpression.Body, out thisPart))
+        //                    {
+        //                        return false;
+        //                    }
+        //                    if (thisPart != null)
+        //                    {
+        //                        path = parentPart + "." + thisPart;
+        //                        return true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
         #endregion
     }
 }
