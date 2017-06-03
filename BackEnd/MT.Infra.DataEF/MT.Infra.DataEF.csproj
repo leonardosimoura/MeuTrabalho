@@ -54,8 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\MTContext.cs" />
+    <Compile Include="EntityConfig\ContatoUsuarioConfig.cs" />
     <Compile Include="EntityConfig\UsuarioConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ContatoUsuarioRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="UoW\UnitOfWork.cs" />

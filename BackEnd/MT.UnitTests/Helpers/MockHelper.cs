@@ -23,7 +23,38 @@ namespace MT.UnitTests.Helpers
 
         public class RepositoryMock
         {
-            public static Mock<IUsuarioRepository> IUsuarioRepositoryMock()
+            public static Mock<IContatoUsuarioRepository> IContatoUsuarioRepositoryMock()
+            {
+                var mock = MockRepository.Create<IContatoUsuarioRepository>();
+                var lista = new List<ContatoUsuario>();
+                mock.Setup(s => s.Adicionar(It.IsAny<ContatoUsuario>()))
+                    .Callback((ContatoUsuario usuario) => lista.Add(usuario));
+
+                mock.Setup(s => s.Atualizar(It.IsAny<ContatoUsuario>()))
+                    .Callback((ContatoUsuario usuario) =>
+                    {
+                        var usu = lista.FirstOrDefault(f => f.UsuarioId == usuario.UsuarioId);
+                        if (usu != null)
+                        {
+                            lista.Remove(usu);
+                            lista.Add(usuario);
+                        }
+                    });
+
+                mock.Setup(s => s.ExcluirAsync(It.IsAny<Expression<Func<ContatoUsuario, bool>>>()))
+                    .Callback((Expression<Func<ContatoUsuario, bool>> predicado) =>
+                    {
+                        foreach (var item in lista.Where(predicado.Compile()))
+                        {
+                            lista.Remove(item);
+                        }
+                    });
+
+                mock.Setup(s => s.Selecionar())
+                    .Returns(lista.AsQueryable());
+                return mock;
+            }
+                public static Mock<IUsuarioRepository> IUsuarioRepositoryMock()
             {
                 var mock = MockRepository.Create<IUsuarioRepository>();
                 var lista = new List<Usuario>();

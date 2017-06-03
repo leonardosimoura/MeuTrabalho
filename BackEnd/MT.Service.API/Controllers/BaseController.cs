@@ -34,21 +34,41 @@ namespace MT.Service.API.Controllers
                     data = result
                 });
             }
-            var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+
+            var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+            if (!ModelState.IsValid)
             {
-                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new
+                var notificacoes = from state in ModelState
+                            from error in state.Value.Errors
+                            select new
+                            {
+                                DomainNotificationId = Guid.NewGuid(),
+                                Version = 1,
+                                Key = state.Key,
+                                Value = error.ErrorMessage
+                            };
+                response.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    success = false,
+                    errors = notificacoes.Select(s => s.Value)
+                }), Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                response.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new
                 {
                     success = false,
                     errors = Notificacao.GetNotifications().Select(n => n.Value)
-                }), Encoding.UTF8, "application/json")
-            };
+                }), Encoding.UTF8, "application/json");
+            }
             return base.ResponseMessage(response);
         }
 
         [NonAction]
         protected bool OperacaoValida()
         {
-            return (!Notificacao.HasNotifications);
+            return (!Notificacao.HasNotifications && ModelState.IsValid);
         }
     }
 }

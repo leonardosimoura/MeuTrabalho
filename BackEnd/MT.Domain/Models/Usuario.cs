@@ -40,12 +40,9 @@ namespace MT.Domain.Models
         }
         public Guid UsuarioId { get; private set; }
         public string Nome { get; private set; }
-
         public Email Email { get; private set; }
-
         public Senha Senha { get; private set; }
+        public DateTime DataCadastro { get; private set; }
 
-        public DateTime DataCadastro { get; set; }
-        
     }
 }

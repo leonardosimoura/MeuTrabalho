@@ -47,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\Repositories\IContatoUsuarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Interfaces\Services\IUsuarioService.cs" />
+    <Compile Include="Models\ContatoUsuario.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\UsuarioService.cs" />
+    <Compile Include="Validations\ContatoUsuarioValidation.cs" />
     <Compile Include="Validations\UsuarioValidation.cs" />
   </ItemGroup>
   <ItemGroup>

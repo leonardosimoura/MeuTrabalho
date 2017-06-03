@@ -19,14 +19,11 @@ namespace MT.UnitTests.Domain
         public async void RegistrarUsuarioValido()
         {
             //Arrange
-            var IUsuarioRepositoryMock = MockHelper.RepositoryMock.IUsuarioRepositoryMock();
-            
-
-            var IDomainNotificationHandlerMock = MockHelper.InfraMock.IDomainNotificationHandlerMock();
-           
-
+            var IUsuarioRepositoryMock = MockHelper.RepositoryMock.IUsuarioRepositoryMock();var IDomainNotificationHandlerMock = MockHelper.InfraMock.IDomainNotificationHandlerMock();
+            var IContatoUsuarioRepositoryMock = MockHelper.RepositoryMock.IContatoUsuarioRepositoryMock();
+            var contatoUsuarioValidation = new ContatoUsuarioValidation(IDomainNotificationHandlerMock.Object);
             var usuarioValidation = new UsuarioValidation(IDomainNotificationHandlerMock.Object, IUsuarioRepositoryMock.Object); // Certo é mockar essa interface tambem
-            var usuarioService = new UsuarioService(IUsuarioRepositoryMock.Object, IDomainNotificationHandlerMock.Object, usuarioValidation);
+            var usuarioService = new UsuarioService(IUsuarioRepositoryMock.Object, IDomainNotificationHandlerMock.Object, usuarioValidation, IContatoUsuarioRepositoryMock.Object,contatoUsuarioValidation);
             var usuario = new Usuario(Guid.NewGuid(),"Leonardo","leonardosimoura@gmail.com","123456789");
             //Act
             usuarioService.Registrar(usuario);
@@ -44,10 +41,11 @@ namespace MT.UnitTests.Domain
         public async void RegistrarUsuarioInValido()
         {
             //Arrange
-            var IUsuarioRepositoryMock = MockHelper.RepositoryMock.IUsuarioRepositoryMock();
-            var IDomainNotificationHandlerMock = MockHelper.InfraMock.IDomainNotificationHandlerMock();
+            var IUsuarioRepositoryMock = MockHelper.RepositoryMock.IUsuarioRepositoryMock(); var IDomainNotificationHandlerMock = MockHelper.InfraMock.IDomainNotificationHandlerMock();
+            var IContatoUsuarioRepositoryMock = MockHelper.RepositoryMock.IContatoUsuarioRepositoryMock();
+            var contatoUsuarioValidation = new ContatoUsuarioValidation(IDomainNotificationHandlerMock.Object);
             var usuarioValidation = new UsuarioValidation(IDomainNotificationHandlerMock.Object, IUsuarioRepositoryMock.Object); // Certo é mockar essa interface tambem
-            var usuarioService = new UsuarioService(IUsuarioRepositoryMock.Object, IDomainNotificationHandlerMock.Object, usuarioValidation);
+            var usuarioService = new UsuarioService(IUsuarioRepositoryMock.Object, IDomainNotificationHandlerMock.Object, usuarioValidation, IContatoUsuarioRepositoryMock.Object, contatoUsuarioValidation);
             var usuario = new Usuario(Guid.NewGuid(), "Leonardo", "", "");
             //Act
             usuarioService.Registrar(usuario);

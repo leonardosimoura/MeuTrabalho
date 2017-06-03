@@ -17,5 +17,7 @@ namespace MT.Domain.Interfaces.Services
         Task<Usuario> SelecionarPorEmaileSenhaAsync(Email email, Senha senha);
 
         Task<IQueryable<Usuario>> SelecionarAsync();
+
+        void SalvarContatoUsuario(ContatoUsuario contatoUsuario);
     }
 }

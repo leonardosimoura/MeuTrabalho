@@ -12,5 +12,7 @@ namespace MT.AppService.Interfaces
         Task RegistrarUsuarioAsync(RegistrarUsuarioViewModel model);
 
         Task<IEnumerable<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25);
+
+        Task SalvarContatoUsuarioAsync(ContatoUsuarioViewModel contatoUsuario);
     }
 }

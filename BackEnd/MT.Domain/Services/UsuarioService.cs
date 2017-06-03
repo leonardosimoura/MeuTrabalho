@@ -17,11 +17,19 @@ namespace MT.Domain.Services
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioValidation _usuarioValidation;
-        public UsuarioService(IUsuarioRepository Repositorio, IDomainNotificationHandler Notificacao, IUsuarioValidation usuarioValidation)
+        private readonly IContatoUsuarioRepository _contatoUsuarioRepository;
+        private readonly IContatoUsuarioValidation _contatoUsuarioValidation;
+        public UsuarioService(IUsuarioRepository Repositorio, 
+                            IDomainNotificationHandler Notificacao,
+                            IUsuarioValidation usuarioValidation,
+                            IContatoUsuarioRepository contatoUsuarioRepository,
+                            IContatoUsuarioValidation contatoUsuarioValidation)
             : base(Notificacao)
         {
             _usuarioRepository = Repositorio;
             _usuarioValidation = usuarioValidation;
+            _contatoUsuarioRepository = contatoUsuarioRepository;
+            _contatoUsuarioValidation = contatoUsuarioValidation;
         }
 
         public void Registrar(Usuario model)
@@ -65,6 +73,23 @@ namespace MT.Domain.Services
         public async Task<IQueryable<Usuario>> SelecionarAsync()
         {
             return _usuarioRepository.Selecionar();
+        }
+
+        public void SalvarContatoUsuario(ContatoUsuario contatoUsuario)
+        {
+            _contatoUsuarioValidation.ValidarSalvar(contatoUsuario);
+
+            if (!Notificacao.HasNotifications)
+            {
+                if (!_contatoUsuarioRepository.Selecionar().Any(a => a.UsuarioId == contatoUsuario.UsuarioId))
+                {
+                    _contatoUsuarioRepository.Adicionar(contatoUsuario);
+                }
+                else
+                {
+                    _contatoUsuarioRepository.Atualizar(contatoUsuario);
+                }
+            }            
         }
     }
 }

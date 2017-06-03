@@ -56,6 +56,7 @@
     <Compile Include="Interfaces\IUsuarioAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioAppService.cs" />
+    <Compile Include="ViewModels\Usuario\ContatoUsuarioViewModel.cs" />
     <Compile Include="ViewModels\Usuario\LoginViewModel.cs" />
     <Compile Include="ViewModels\Usuario\RegistrarUsuarioViewModel.cs" />
     <Compile Include="ViewModels\Usuario\UsuarioLogadoViewModel.cs" />

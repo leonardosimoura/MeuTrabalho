@@ -33,6 +33,14 @@ namespace MT.AppService
             await UoW.CommitAsync();
         }
 
+        public async Task SalvarContatoUsuarioAsync(ContatoUsuarioViewModel contatoUsuario)
+        {
+            UoW.BeginTransaction();
+            var _contatosuario = Mapper.Map<ContatoUsuarioViewModel, ContatoUsuario>(contatoUsuario);
+            _usuarioService.SalvarContatoUsuario(_contatosuario);
+            await UoW.CommitAsync();
+        }
+
         public async Task<IEnumerable<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25)
         {
             var query = await _usuarioService.SelecionarAsync();

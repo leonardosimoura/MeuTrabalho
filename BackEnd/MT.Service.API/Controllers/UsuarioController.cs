@@ -38,7 +38,20 @@ namespace MT.Service.API.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Registrar(RegistrarUsuarioViewModel model)
         {
-            await _usuarioAppService.RegistrarUsuarioAsync(model);
+            if (ModelState.IsValid)        
+                await _usuarioAppService.RegistrarUsuarioAsync(model);
+                      
+            return Response();
+        }
+
+        [Route("salvarcontatousuario")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> SalvarContatoUsuario(ContatoUsuarioViewModel model)
+        {
+            if (ModelState.IsValid)
+                await _usuarioAppService.SalvarContatoUsuarioAsync(model);
+
             return Response();
         }
 

@@ -106,12 +106,14 @@ namespace MT.Infra.CrossCutting.IoC
 
             //Validation
             container.Register<IUsuarioValidation, UsuarioValidation>();
-
+            container.Register<IContatoUsuarioValidation, ContatoUsuarioValidation>();            
 
             // Infra - Data
             //container.Register(typeof(IRepositorySQL<>), typeof(RepositorySQL<>));
             container.Register<MTContext>();
             container.Register<IUsuarioRepository, UsuarioRepository>();
+            container.Register<IContatoUsuarioRepository, ContatoUsuarioRepository>();
+            
             container.Register<IUnitOfWork, UnitOfWork>();
 
             //Logger

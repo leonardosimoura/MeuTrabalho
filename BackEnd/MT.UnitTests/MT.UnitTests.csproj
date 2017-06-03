@@ -76,6 +76,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MT.AppService\MT.AppService.csproj">
       <Project>{ae1d2ed2-7021-4723-a02b-2690825bfe9a}</Project>
       <Name>MT.AppService</Name>
@@ -88,17 +91,38 @@
       <Project>{90cae729-cb34-4649-81f2-c542da0c11e7}</Project>
       <Name>MT.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MT.Infra.CrossCutting.AspNet\MT.Infra.CrossCutting.AspNet.csproj">
+      <Project>{9fe23b9b-931e-4c45-a551-6fae35119c53}</Project>
+      <Name>MT.Infra.CrossCutting.AspNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MT.Infra.CrossCutting.IoC\MT.Infra.CrossCutting.IoC.csproj">
+      <Project>{38c3a7bc-8dac-4141-8393-64c1a37b47c8}</Project>
+      <Name>MT.Infra.CrossCutting.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MT.Infra.CrossCutting.Log\MT.Infra.CrossCutting.Log.csproj">
+      <Project>{d876021f-50ea-4462-8724-d77f19d5b5f0}</Project>
+      <Name>MT.Infra.CrossCutting.Log</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MT.Infra.CrossCutting.Seguranca\MT.Infra.CrossCutting.Seguranca.csproj">
       <Project>{7659352f-c65f-4421-a7f2-a20bfdd36ba2}</Project>
       <Name>MT.Infra.CrossCutting.Seguranca</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MT.Infra.Data.Migrations\MT.Infra.Data.Migrations.csproj">
+      <Project>{2b6fbd7c-dc70-4b6b-b63c-4fd014d8c4c8}</Project>
+      <Name>MT.Infra.Data.Migrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MT.Infra.DataEF\MT.Infra.DataEF.csproj">
+      <Project>{993bee1e-e985-42ba-bf47-500aaa7bea15}</Project>
+      <Name>MT.Infra.DataEF</Name>
     </ProjectReference>
     <ProjectReference Include="..\MT.Infra.Extensions\MT.Infra.Extensions.csproj">
       <Project>{315edad3-3334-41f1-a9b0-05186e0807df}</Project>
       <Name>MT.Infra.Extensions</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\MT.Service.API\MT.Service.API.csproj">
+      <Project>{f01d2e77-46dc-47ad-9e1c-7aabef181d9f}</Project>
+      <Name>MT.Service.API</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
