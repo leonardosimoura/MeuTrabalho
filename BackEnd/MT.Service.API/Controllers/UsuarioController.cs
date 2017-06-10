@@ -29,8 +29,7 @@ namespace MT.Service.API.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Get(int page,int pagesize = 25)
         {
-            var query = await _usuarioAppService.SelecionarAsync(page, pagesize);
-            return Response(query);
+            return Response(await _usuarioAppService.SelecionarAsync(page, pagesize));
         }
 
         [Route("registrar")]

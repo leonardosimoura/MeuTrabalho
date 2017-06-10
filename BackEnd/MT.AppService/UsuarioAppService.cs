@@ -5,6 +5,7 @@ using MT.Domain.Interfaces.Services;
 using MT.Domain.Models;
 using MT.Domain.Shared.Notifications;
 using MT.Domain.Shared.UoW;
+using MT.Infra.Extensions.PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +42,16 @@ namespace MT.AppService
             await UoW.CommitAsync();
         }
 
-        public async Task<IEnumerable<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25)
+        public async Task<IPagedList<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25)
         {
             var query = await _usuarioService.SelecionarAsync();
-            return Mapper.Map<IEnumerable<Usuario>, IEnumerable<UsuarioViewModel>>(query.OrderBy(a => a.Email.Endereco).Pagination(page,pagesize));
+            return query.OrderBy(a => a.Email.Endereco).ToViewModelPagedList(page, pagesize, s => new UsuarioViewModel()
+            {
+                Email = s.Email.Endereco,
+                Nome = s.Nome,
+                Senha = s.Senha.CodigoAcesso,
+                UsuarioId = s.UsuarioId
+            });
         }
     }
 }

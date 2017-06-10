@@ -30,11 +30,13 @@ export class AuthService implements CanActivate {
         let papel = papeisData[0]['papel'];
 
                 if(papel){
-                    let papeis = this.user.papeis.some(x => x == papel);
-                    if(!papeis){
-                        this.router.navigate(['/acesso-negado']);
-                        return false;
-                    }
+                    if  (this.user != null && this.user.papeis != null){
+                        let papeis = this.user.papeis.some(x => x == papel);
+                        if(!papeis){
+                            this.router.navigate(['/acesso-negado']);
+                            return false;
+                        }
+                    }                 
                 }
         }
         

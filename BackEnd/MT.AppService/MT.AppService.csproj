@@ -40,6 +40,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +65,10 @@
     <Compile Include="ViewModels\Usuario\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\MT.Infra.Extensions\MT.Infra.Extensions.csproj">
+      <Project>{ae92a705-d1e3-4e2a-b254-dd37bae4c5c1}</Project>
+      <Name>MT.Infra.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MT.Domain.Shared\MT.Domain.Shared.csproj">
       <Project>{FF7F8568-A585-4909-AC64-73B15140A6E9}</Project>
       <Name>MT.Domain.Shared</Name>
@@ -70,10 +76,6 @@
     <ProjectReference Include="..\MT.Domain\MT.Domain.csproj">
       <Project>{90CAE729-CB34-4649-81F2-C542DA0C11E7}</Project>
       <Name>MT.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MT.Infra.Extensions\MT.Infra.Extensions.csproj">
-      <Project>{315edad3-3334-41f1-a9b0-05186e0807df}</Project>
-      <Name>MT.Infra.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

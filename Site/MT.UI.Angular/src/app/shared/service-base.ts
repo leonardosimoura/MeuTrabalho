@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/throw';
 import { environment } from "environments/environment";
+import { PagedList } from "app/utils/pagedList";
 
 export abstract class ServiceBase {
     public Token: string = "";
@@ -17,7 +18,7 @@ export abstract class ServiceBase {
         if (environment.production) {
             this.UrlService = "http://meutrabalhoapp.database.windows.net/api/";
         }else{
-            this.UrlService = "http://meutrabalhoapp.database.windows.net/api/";
+            this.UrlService = "http://localhost:60202/api/";
         }
     }
 
@@ -32,6 +33,11 @@ export abstract class ServiceBase {
     }
 
     protected extractData(response: Response) {
+        let body = response.json();
+        return body.data || {};
+    }
+
+     protected extractPagedData<TEntity>(response: Response) : PagedList<TEntity> {
         let body = response.json();
         return body.data || {};
     }

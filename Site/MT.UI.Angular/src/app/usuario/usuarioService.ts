@@ -1,6 +1,6 @@
 import {  Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Http, Response, Headers, RequestOptions, RequestOptionsArgs } from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Subscription} from 'rxjs/Subscription';
@@ -57,6 +57,16 @@ export class UsuarioService extends ServiceBase {
                 .catch(this.serviceErrorToken);
 
             return response;
+    }
+
+    obterUsuarios(pagina:number,qtdePorPagina:number){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+            let options = new RequestOptions({ headers: headers });
+            let response = this.http
+                .get(this.UrlService + "usuario/" + pagina + "/" + qtdePorPagina,options)
+                .map(this.extractPagedData)
+                .catch(this.serviceError);
+        return response;
     }
     
 }

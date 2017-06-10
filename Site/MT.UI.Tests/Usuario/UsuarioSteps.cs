@@ -79,6 +79,7 @@ namespace MT.UI.Tests
         [Then(@"Recebe uma mensagem com sucesso")]
         public void EntaoRecebeUmaMensagemComSucesso()
         {
+            Browser.AguardarEmSegundos(1);
             Browser.ObterScreenShot("MensagemFinal");
             Assert.Contains("SUCESSO", Browser.ObterTextoElementoPorClasse("toast").ToUpper());
         }

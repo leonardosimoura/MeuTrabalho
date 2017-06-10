@@ -1,4 +1,5 @@
 ﻿using MT.AppService.ViewModels.Usuario;
+using MT.Infra.Extensions.PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MT.AppService.Interfaces
     {
         Task RegistrarUsuarioAsync(RegistrarUsuarioViewModel model);
 
-        Task<IEnumerable<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25);
+        Task<IPagedList<UsuarioViewModel>> SelecionarAsync(int page , int pagesize = 25);
 
         Task SalvarContatoUsuarioAsync(ContatoUsuarioViewModel contatoUsuario);
     }

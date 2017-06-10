@@ -142,6 +142,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\MT.Infra.Extensions\MT.Infra.Extensions.csproj">
+      <Project>{AE92A705-D1E3-4E2A-B254-DD37BAE4C5C1}</Project>
+      <Name>MT.Infra.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MT.AppService\MT.AppService.csproj">
       <Project>{AE1D2ED2-7021-4723-A02B-2690825BFE9A}</Project>
       <Name>MT.AppService</Name>
@@ -165,10 +169,6 @@
     <ProjectReference Include="..\MT.Infra.Data.Migrations\MT.Infra.Data.Migrations.csproj">
       <Project>{2b6fbd7c-dc70-4b6b-b63c-4fd014d8c4c8}</Project>
       <Name>MT.Infra.Data.Migrations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MT.Infra.Extensions\MT.Infra.Extensions.csproj">
-      <Project>{315edad3-3334-41f1-a9b0-05186e0807df}</Project>
-      <Name>MT.Infra.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

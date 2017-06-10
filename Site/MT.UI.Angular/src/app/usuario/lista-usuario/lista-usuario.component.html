@@ -21,21 +21,17 @@
   </thead>
     
 <tbody>
-  <tr>
-      <td>
-          00000000000000000
-      </td>
-      <td>
-          Leonardo
-      </td>
-      <td>
-          leonardosimoura@gmail.com
-      </td>
-      <td>
+     <tr *ngFor="let usuario of usuarios">
+        <td> {{usuario.usuarioId}} </td>
+        <td> {{usuario.nome}} </td>
+        <td> {{usuario.email}} </td>
+        <td>
           <a href="javascript:void()" class="btn btn-warning"> Editar <i class="fa fa-edit"> </i> </a>
-           <a href="javascript:void()" class="btn btn-danger"> Editar <i class="fa fa-trash-o"> </i> </a>
-      </td>
-    </tr>
+          <a href="javascript:void()" class="btn btn-danger"> Excluir <i class="fa fa-trash-o"> </i> </a>
+        </td>
+      </tr> 
 </tbody>
 </table>
+
+<button type="button"  class='btn btn-success' value="Carregar" (click)="carregarUsuarios()" >Carregar </button>
 </div>

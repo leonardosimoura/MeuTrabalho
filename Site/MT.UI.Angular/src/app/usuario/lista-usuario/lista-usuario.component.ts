@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoService, SeoModel } from "app/services/seo.service";
+import { UsuarioService } from "app/usuario/usuarioService";
 @Component({
   selector: 'app-lista-usuario',
   templateUrl: './lista-usuario.component.html',
@@ -8,10 +9,12 @@ import { SeoService, SeoModel } from "app/services/seo.service";
 export class ListaUsuarioComponent implements OnInit {
 
 
-ListaUsuarioViewModel: ListaUsuarioViewModel[]= [];
+usuarios: ListaUsuarioViewModel[]= [];
+qtdeItens:number;
+paginaAtual:number = 1;
+  public errors: any[] = [];
 
-
-  constructor(seoService: SeoService) { 
+  constructor(seoService: SeoService , private  usuarioService: UsuarioService) { 
     let seoModel: SeoModel = <SeoModel>{
       title: 'Usuários',
       description: 'Lista dos usuários',
@@ -21,26 +24,37 @@ ListaUsuarioViewModel: ListaUsuarioViewModel[]= [];
 
     seoService.setSeoData(seoModel);
 
-
-
-
-   for (var i = 1; i <= 20; i++) {
-     this.ListaUsuarioViewModel.push({UsuarioId: i.toString(),Nome : "Nome"+i.toString(), Email : "email"+i.toString() + "@email.com"});
-   }
-
+ 
+    this.carregarUsuarios();
 
   }
 
   ngOnInit() {
   }
+  
+  carregarUsuarios(){
+      this.usuarioService.obterUsuarios(this.paginaAtual,2)
+              .subscribe(
+                result => {this.onObterUsuariosComplete(result)},
+                error => {this.errors = JSON.parse(error._body).errors}
+              );
+  }
+   onObterUsuariosComplete(response: any):void{
+      this.errors = [];  
+
+      response.itens.forEach(element => {
+         this.usuarios.push(element);
+      }); 
+
+      this.qtdeItens = response.qtdeItens;
+      this.paginaAtual++;
+    }
 
 }
 
 
 export class ListaUsuarioViewModel{
-
- UsuarioId:AAGUID;
- Nome:string;
- Email:string
-
+ usuarioId:AAGUID;
+ nome:string;
+ email:string;
 }
