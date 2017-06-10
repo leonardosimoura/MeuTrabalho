@@ -22,7 +22,7 @@ export class UsuarioService extends ServiceBase {
             let options = new RequestOptions({ headers: headers });
 
             let response = this.http
-                .post("http://localhost:60202/api/usuario/registrar",usuario, options)
+                .post(this.UrlService + "usuario/registrar",usuario, options)
                 .map(this.extractData)
                 .catch(this.serviceError);
 
@@ -34,7 +34,7 @@ export class UsuarioService extends ServiceBase {
             let options = new RequestOptions({ headers: headers });
 
             let response = this.http
-                .post("http://localhost:60202/api/usuario/login",usuario, options)
+                .post(this.UrlService + "usuario/login",usuario, options)
                 .map(this.extractData)
                 .catch(this.serviceError);
 
@@ -52,7 +52,7 @@ export class UsuarioService extends ServiceBase {
             let body = urlSearchParams.toString();
 
             let response = this.http            
-                .post("http://localhost:60202/api/usuario/token",body, options)
+                .post(this.UrlService + "usuario/token",body, options)
                 .map(this.extractDataToken)
                 .catch(this.serviceErrorToken);
 

@@ -6,15 +6,22 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/throw';
+import { environment } from "environments/environment";
 
 export abstract class ServiceBase {
     public Token: string = "";
 
     constructor() {
         this.Token = localStorage.getItem('app.token');
+
+        if (environment.production) {
+            this.UrlService = "http://meutrabalhoapp.database.windows.net/api/";
+        }else{
+            this.UrlService = "http://meutrabalhoapp.database.windows.net/api/";
+        }
     }
 
-    protected UrlServiceV1: string = "http://localhost:8285/api/v1/";
+    protected UrlService: string = "http://localhost:60202/api/";
 
 
     protected obterAuthHeader(): RequestOptions {
